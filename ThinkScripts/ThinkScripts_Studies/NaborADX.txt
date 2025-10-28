@@ -1,0 +1,11 @@
+# NaborADX
+
+declare lower;
+input horizontal = 20;
+input length = 14;
+input averageType = AverageType.WILDERS;
+
+plot ADX = DMI(length, averageType).ADX;
+plot horiz = horizontal;
+ADX.SetDefaultColor(GetColor(5));
+horiz.setDefaultColor(GetColor(4));

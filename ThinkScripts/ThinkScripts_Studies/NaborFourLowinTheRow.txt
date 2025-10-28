@@ -1,0 +1,4 @@
+plot BuySig = (low > low[1] and low[1] > low[2] and low[2] > low[3] and low[3] > low[4]);
+
+BuySig.SetPaintingStrategy(paintingstrategy.boolean_arrow_up);
+BuySig.AssignValueColor(color.yellOW);

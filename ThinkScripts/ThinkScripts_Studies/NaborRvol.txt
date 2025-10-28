@@ -1,0 +1,7 @@
+declare lower;
+
+input periodo = 20;
+
+plot Rvol = volume / Average(volume, periodo)[1];
+
+AddLabel(yes, "Rvol: "+ Round(Rvol,2) , Color.liGHT_GREEN);

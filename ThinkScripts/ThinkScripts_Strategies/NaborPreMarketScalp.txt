@@ -1,0 +1,15 @@
+# This Premarket Trading Strategy Changed my Life (HIGH WIN %)
+# Treyding Stocks
+# https://www.youtube.com/watch?v=_8-6gkqpHXY
+
+input positionsize = 100;
+
+def premarket = secondsFromTime(700) > 0 and secondstilltime(925) > 0;
+
+def buy = volume > 10000 and volume > average(volume, 10)[1] * 5 and premarket and close < open;
+
+def sell = !buy and close < open;
+
+addOrder(OrderType.BUY_TO_OPEN, buy, close, positionsize/close, color.green, color.green, "BUY");
+
+addOrder(OrderType.SELL_TO_CLOSE, sell, close, positionsize/close, color.red, color.red, "SELL");

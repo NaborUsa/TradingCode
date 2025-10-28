@@ -1,0 +1,24 @@
+input MaLength = 200;
+input RSIValue = 10;
+input RSILength = 3;
+
+plot maTrend = SimpleMovingAvg(length = MaLength);
+
+#def dip = RSI(length = RSILength) < RSIValue;
+#def dip = RSI(length = RSILength) crosses below RSIValue;
+def dip = RSI(length = RSILength) crosses above RSIValue;
+
+
+def x = dip and low > maTrend;
+
+
+plot arrow = if x then low else Double.NaN;
+
+arrow.SetPaintingStrategy(PaintingStrategy.ARROW_UP);
+arrow.AssignValueColor(Color.CYAN);
+
+#declare lower;
+#input length = 10;
+#def HH = Highest(high, length);
+#def LL = Lowest(low, length);
+#plot "Williams %R" = if HH == LL then -100 else (HH - close) / (HH - LL) * (-100);

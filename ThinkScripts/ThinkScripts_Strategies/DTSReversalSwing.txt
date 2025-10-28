@@ -1,0 +1,6 @@
+input PositionSize = 2500;
+
+plot SMA = simplemovingavg(length = 200);
+
+addOrder(OrderType.BUY_TO_OPEN, RSI() < 40 and low > SMA, close, (PositionSize)/close, name = "BUY", tickcolor = color.green, arrowcolor = color.green);
+addOrder(OrderType.SELL_TO_CLOSE, RSI() > 45, close, name = "SELL", tickcolor = color.red, arrowcolor = color.red);

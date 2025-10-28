@@ -1,0 +1,23 @@
+declare lower;
+
+#input exchange = {default NYSE, NASDAQ, AMEX};
+
+input up_symbol = "$UVOL";
+input dn_symbol = "$DVOL";
+
+def upv = close(symbol = up_symbol);
+def dnv = close(symbol = dn_symbol);
+
+addLabel(yes, "Current Upvolume: " + upv + "  ", color.cyan);
+addLabel(yes, "Current DownVolume: " + dnv + "  ", color.dark_orange);
+addLabel(yes, "Current DVOL Ratio: " + upv / dnv + "  ", color.cyan);
+addLabel(yes, "Current DVOL Ratio: " + dnv / upv + "  ", color.dark_orange);
+
+plot ru = if upv > dnv then upv / dnv else double.nan;
+plot rd = if upv < dnv then (dnv / upv) * -1 else double.nan;
+
+ru.setPaintingStrategy(PaintingStrategy.HISTOGRAM);
+ru.SetDefaultColor(color.cyan);
+
+rd.setPaintingStrategy(PaintingStrategy.HISTOGRAM);
+rd.SetDefaultColor(color.dark_orange);

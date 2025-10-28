@@ -1,0 +1,13 @@
+# ThinkorSwim Study you MUST Have on Your Chart
+# Treyding Stocks
+# https://www.youtube.com/watch?v=o4rEfW2Qm7A
+#Nabor_BuyDips_200ma
+input MAlength = 200;
+input LowLength = 15;
+
+plot MA = simplemovingavg(length = MAlength);
+
+plot BuySig = low < lowest(low, LowLength)[1] and close > MA;
+
+BuySig.SetPaintingStrategy(paintingstrategy.boolean_arrow_up);
+BuySig.AssignValueColor(color.white);

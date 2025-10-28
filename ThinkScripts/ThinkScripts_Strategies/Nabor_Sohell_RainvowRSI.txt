@@ -1,0 +1,45 @@
+# It's Impossible to Lose with THIS Strategy! It Almost Always Wins!
+# Soheil PKO
+
+# https://www.youtube.com/watch?v=tZf1VhRInaA
+
+
+# 1 Condition: PriceActionIndicator above 80 EMA and should below also
+#   at least twoCrows higher highs and higher lows
+
+# 2 Wait for a pullback
+# We wnat the priceActionIndicator to go below the EMA 21 green line
+# usually then EMA3 red lime goes below the blue line
+# and we wait for the red line EMS3 to cross above the blue linearRegAdjEMA EMS5 
+
+# When then red linearRegAdjEMA EMA3 is close above the blue line
+# this is the buy signal (candle green) and RSi shoud below above the center line
+# but not above 70
+# note: The lines should be separated inertia order with an upside angle.
+#       If theyare jammed and the linea are on each other, we don't take the signal
+#       sideway range
+
+# close method_1: EMS3 crosses below EMS 5
+
+input movAveExp3 = 3; # Red
+input movAveExp5 = 5; # Blue
+input movAveExp13 = 13; # Yelow or orange
+input movAveExp21 = 21; # Green
+input movAveExp80 = 80; # light Blue or of White Gray
+
+
+# 3 and 5 are used as a trigger for tend intries
+plot  EMA3 = ExpAverage(close, movAveExp3);
+plot  EMA5 = ExpAverage(close, movAveExp5);
+# Then we use these two moving averages, the yellow(13) and green(21) linearRegAdjEMA 
+# for identifying minor trends within the major trend.above When the 13(yellow)
+# is above the green line atells us that we have a minor bullish trend.
+plot  EMA13 = ExpAverage(close, movAveExp13);
+plot  EMA21 = ExpAverage(close, movAveExp21);
+plot  EMA80 = ExpAverage(close, movAveExp80);   # Major Trend of the Market
+#####plot rrssii = RSI();
+
+######EMA3.SetDefaultColor(color.RED);
+
+
+AddOrder(OrderType.BUY_AUTO, no);

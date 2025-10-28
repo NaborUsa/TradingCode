@@ -1,0 +1,27 @@
+# ThinkorSwim Automated Price Action Channels Strategy
+# Treyding Stocks
+# https://www.youtube.com/watch?v=QCODwioUuqg&t=167s
+
+input positionsize = 1000;
+input f = 1.5;
+input l = 20;
+input at = AverageType.SIMPLE;
+
+plot mid = KeltnerChannels(factor = f, length = l, averagetype = at).avg;
+plot upper = KeltnerChannels(factor = f, length = l, averagetype = at).upper_band;
+plot lower = KeltnerChannels(factor = f, length = l, averagetype = at).lower_band;
+
+# adx lest than 20
+# in a range
+# trending up 
+
+def buy = close crosses above upper;
+def sell = close crosses below mid;
+
+
+
+
+
+AddOrder(OrderType.BUY_TO_OPEN, buy, close, positionsize / close, Color.GREEN, Color.GREEN, "BUY");
+
+AddOrder(OrderType.SELL_TO_CLOSE, sell, close, positionsize / close, Color.RED, Color.RED, "SELL");

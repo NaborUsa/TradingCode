@@ -1,0 +1,31 @@
+input PositionSize = 1000;
+input MaLength = 200;
+input RSIValue = 10;
+input RSILength = 3;
+input RSISell = 60;
+
+plot maTrend = SimpleMovingAvg(length = MaLength);
+
+#def dip = RSI(length = RSILength) < RSIValue;
+#def dip = RSI(length = RSILength) crosses below RSIValue;
+def dip = RSI(length = RSILength) crosses above RSIValue;
+
+
+def x = dip and low > maTrend;
+def y = rsi(length = 3) crosses above RSISell;
+
+
+plot arrow = if x then low else Double.NaN;
+
+arrow.SetPaintingStrategy(PaintingStrategy.boolean_arrow_up);
+arrow.AssignValueColor(Color.White);
+
+#declare lower;
+#input length = 10;
+#def HH = Highest(high, length);
+#def LL = Lowest(low, length);
+#plot "Williams %R" = if HH == LL then -100 else (HH - close) / (HH - LL) * (-100);
+
+addOrder(OrderType.BUY_TO_OPEN, x, close, PositionSize/close, color.green, color.green, "Buy");
+
+addOrder(ordertype.sell_to_close, y, close, positionsize/close, color.red, color.red, "Sell");

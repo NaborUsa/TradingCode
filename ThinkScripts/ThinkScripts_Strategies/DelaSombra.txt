@@ -1,0 +1,14 @@
+
+#def ee = ExpAverage(close, length = 10);
+
+#def ee1 = ExpAverage(close, length = 10)[1];
+
+
+
+plot exp2 = ExpAverage(close, length = 10);
+
+plot exp1 = ExpAverage(close, length = 10)[-1];
+
+#AddOrder(OrderType.BUY_TO_OPEN, exp1 > exp2, close,1000, Color.GREEN, Color.GREEN, "BUY");
+
+#AddOrder(OrderType.SELL_TO_CLOSE, exp1 < exp2, close,1000, color.red, color.red, "SELL");

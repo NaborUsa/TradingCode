@@ -1,0 +1,19 @@
+input l = 200;
+input positionsize = 200;
+
+plot SMA = simplemovingavg(length = l);
+#plot rrr = rsi(3);
+
+def buy = SimpleMovingAvg(length = 200) < close and
+RSI(3) < 10;
+
+
+
+
+def sell = rsi(3) > 80;
+
+
+AddOrder(OrderType.BUY_TO_OPEN, buy, close, positionsize / close, tickcolor = Color.WHITE, arrowcolor = Color.GREEN);
+
+
+AddOrder(OrderType.SELL_TO_CLOSE, sell, close, positionsize / close, Color.RED, Color.RED);

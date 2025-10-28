@@ -1,0 +1,14 @@
+input positionsize = 1000;
+input riskamount = 2;
+
+def r = positionsize * (riskamount / 100);  # risk Calculation
+def t = r / atr();  # Trade Size Calculation
+
+plot entry = highest(high,20)[1];
+plot exit = lowest(low,20)[1];
+
+AddOrder(OrderType.BUY_TO_OPEN, close > entry, close, t, color.green, color.green, "BUY");
+
+AddOrder(OrderType.SELL_TO_CLOSE, close < exit, close, t, color.red, color.red, "SELL");
+
+AddOrder(OrderType.SELL_TO_CLOSE, close < entryprice() - atr()[1], close, t, color.yellow, color.yellow, "STOP");

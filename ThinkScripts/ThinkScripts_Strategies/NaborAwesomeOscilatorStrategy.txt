@@ -1,0 +1,15 @@
+# STOP Using MACD, Use This Indicator Instead
+# Treyding Stocks
+# https://www.youtube.com/watch?v=unP2P36e2j8
+
+input positionsize = 1000;
+
+def buy = AwesomeOscillator()[1] < AwesomeOscillator()[2] and AwesomeOscillator() > AwesomeOscillator()[1];
+
+def sell = AwesomeOscillator() < AwesomeOscillator()[1];
+
+def buy2 = AwesomeOscillator() crosses above 0;
+def sell2 = AwesomeOscillator() crosses below 0;
+
+AddOrder(OrderType.BUY_TO_OPEN, buy2, close, positionsize / close, Color.GREEN, Color.GREEN,"BUY");
+AddOrder(OrderType.SELL_TO_CLOSE, sell2, close, positionsize / close, Color.RED, Color.RED, "SELL");

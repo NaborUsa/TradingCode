@@ -1,0 +1,24 @@
+# Catch Breakouts Early — ThinkorSwim Automation Setup
+# Treyding Stocks
+# https://www.youtube.com/watch?v=5hjiYhzJEwI
+
+# DTSBreakoutDetection:
+
+plot Data = if volume > 1000000 and close > open and volume > Average(volume, 50)[1] * 2 then low else Double.NaN;
+
+Data.SetPaintingStrategy(PaintingStrategy.BOOLEAN_ARROW_UP);
+Data.SetlineWeight(5);
+Data.SetDefaultColor(color.white);
+
+# Scan:
+close > open
+volume > 1000000 or volume[1] > 1000000
+volume > average(volume,50)[1] * 2
+percentchg() > 0
+
+
+Columm (EarlyBreakOut): 
+
+PercentChg
+
+# Notes PercentChg positive and near 0 for early breakouts.
